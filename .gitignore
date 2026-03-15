@@ -1,0 +1,8 @@
+.env
+chroma_data/
+node_modules/
+__pycache__/
+.venv/
+venv/
+source_docs/
+.claude/
