@@ -43,16 +43,10 @@ app = FastAPI(
 )
 
 # ── CORS ─────────────────────────────────────────────────────
-origins = [
-    "http://localhost:5173",          # Vite dev server
-    "http://localhost:3000",
-    "https://onboard-ai.vercel.app",  # update with your Vercel URL
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
