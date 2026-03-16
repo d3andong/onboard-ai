@@ -13,14 +13,18 @@ function SuggestionChips({ chips, onSelect, loading }) {
   return (
     <div className="px-4 pt-3 pb-2 max-w-3xl mx-auto w-full">
       {loading && <Loader2 size={11} className="text-muted animate-spin mb-2" />}
-      <div className="flex flex-wrap gap-x-3 gap-y-2">
+      <div
+        className="flex gap-x-3"
+        style={{ overflowX: 'auto', scrollbarWidth: 'none' }}
+      >
         {chips.map((chip, i) => {
           const text = typeof chip === 'string' ? chip : chip.text;
           return (
             <button
               key={i}
               onClick={() => onSelect(text)}
-              className="max-w-[300px] text-left text-[13px] text-charcoal bg-white/70 border border-gray-200 hover:bg-white rounded-full px-3 py-1.5 transition-colors"
+              style={{ flexShrink: 0 }}
+              className="text-left text-[13px] text-charcoal bg-white/70 border border-gray-200 hover:bg-white rounded-full px-3 py-1.5 transition-colors"
             >
               {text}
             </button>
@@ -46,10 +50,6 @@ export default function ChatInterface({
   const lastAiCount = useRef(0);
   const chipsInitialized = useRef(false);
   const bottomRef = useRef(null);
-
-  useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
-  }, [messages, loading]);
 
   useEffect(() => {
     if (messages.length === 0) {
