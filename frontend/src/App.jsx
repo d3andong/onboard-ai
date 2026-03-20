@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout';
 import ChatInterface from './components/ChatInterface';
 import OnboardingModal from './components/OnboardingModal';
+import ColdStartToast from './components/ColdStartToast';
 import ViewerPage from './components/viewer/ViewerPage';
 import { useChat } from './hooks/useChat';
 import { useDocuments } from './hooks/useDocuments';
@@ -16,6 +17,8 @@ export default function App() {
   const [suggestedQuestions, setSuggestedQuestions] = useState([]);
   const [questionsLoading, setQuestionsLoading] = useState(false);
   const prevTopicId = useRef(null);
+
+  const anyLoading = topicsLoading || loading || questionsLoading;
 
   const [showOnboarding, setShowOnboarding] = useState(
     () => localStorage.getItem('onboarding-complete') !== 'true'
@@ -77,6 +80,8 @@ export default function App() {
                 onComplete={handleOnboardingComplete}
               />
             )}
+
+            <ColdStartToast loading={anyLoading} />
           </>
         }
       />
